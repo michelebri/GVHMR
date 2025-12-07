@@ -17,9 +17,11 @@ from hmr4d.utils.net_utils import moving_average_smooth
 
 
 class Tracker:
-    def __init__(self) -> None:
+    def __init__(self, yolo_ckpt_path=None) -> None:
         # https://docs.ultralytics.com/modes/predict/
-        self.yolo = YOLO(PROJ_ROOT / "inputs/checkpoints/yolo/yolov8x.pt")
+        if yolo_ckpt_path is None:
+            yolo_ckpt_path = PROJ_ROOT / "inputs/checkpoints/yolo/yolov8x.pt"
+        self.yolo = YOLO(yolo_ckpt_path)
 
     def track(self, video_path):
         track_history = []

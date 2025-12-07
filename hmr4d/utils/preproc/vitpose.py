@@ -11,8 +11,9 @@ from hmr4d.utils.geo.flip_utils import flip_heatmap_coco17
 
 
 class VitPoseExtractor:
-    def __init__(self, tqdm_leave=True):
-        ckpt_path = "inputs/checkpoints/vitpose/vitpose-h-multi-coco.pth"
+    def __init__(self, ckpt_path=None, tqdm_leave=True):
+        if ckpt_path is None:
+            ckpt_path = "inputs/checkpoints/vitpose/vitpose-h-multi-coco.pth"
         self.pose = build_model("ViTPose_huge_coco_256x192", ckpt_path)
         self.pose.cuda().eval()
 
